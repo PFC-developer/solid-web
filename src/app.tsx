@@ -1,5 +1,5 @@
 import { Component, For, onMount } from "solid-js"
-import { UnsignedTx, WalletName, WalletType } from "cosmes/wallet"
+import { UnsignedTx } from "cosmes/wallet"
 
 import { routes } from "./routes"
 import { useRoutes } from "@solidjs/router"
@@ -7,16 +7,12 @@ import { useRoutes } from "@solidjs/router"
 import { MsgSend } from "cosmes/client"
 import { getDenom } from "./connect/utils"
 import Nav from "./layout/nav"
-import { CONTROLLERS, TYPES, WALLETS } from "./connect/constants"
+import { CONTROLLERS, WALLETS } from "./connect/constants"
 import {
   chain,
   connect,
-  connectedWallet,
+  disconnect,
   isConnected,
-  setConnectedWallet,
-  setIsConnected,
-  setType,
-  setWallet,
   setWallets,
   type,
   wallet,
@@ -62,12 +58,6 @@ const App: Component = () => {
       }
     }
   })
-
-  function disconnect() {
-    CONTROLLERS[wallet()].disconnect([chain()])
-    setConnectedWallet(undefined)
-    setIsConnected(false)
-  }
 
   async function signArbitrary() {
     const wallet = wallets[chain()]
@@ -131,36 +121,8 @@ const App: Component = () => {
       <Nav />
 
       <main>
-        <span>Connected Wallet = {connectedWallet()?.address || "-none-"}</span>
         <div class=" bg-gray-900 text-gray-100 flex flex-col items-center justify-center text-sm sm:text-base md:text-lg space-y-3 p-3">
-          <div class="flex space-x-2">
-            <select
-              class="bg-gray-700 rounded p-2 text-gray-200"
-              value={wallet()}
-              onChange={e => {
-                disconnect()
-                setWallet(e.target.value as WalletName)
-              }}
-            >
-              <For each={Object.keys(WALLETS)}>
-                {wallet => (
-                  <option value={wallet}>{WALLETS[wallet as WalletName]}</option>
-                )}
-              </For>
-            </select>
-            <select
-              class="bg-gray-700 rounded p-2 text-gray-200"
-              value={type()}
-              onChange={e => {
-                disconnect()
-                setType(e.target.value as WalletType)
-              }}
-            >
-              <For each={Object.keys(TYPES)}>
-                {type => <option value={type}>{TYPES[type as WalletType]}</option>}
-              </For>
-            </select>
-          </div>
+          <div class="flex space-x-2"></div>
 
           <div class="flex space-x-2">
             <button

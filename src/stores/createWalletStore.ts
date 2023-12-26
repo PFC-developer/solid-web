@@ -47,3 +47,8 @@ export async function connect(type: WalletType, chainIds: string[]) {
     alert((err as Error).message)
   }
 }
+export function disconnect() {
+  CONTROLLERS[wallet()].disconnect([chain()])
+  setConnectedWallet(undefined)
+  setIsConnected(false)
+}
