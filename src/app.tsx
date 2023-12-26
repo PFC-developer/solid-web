@@ -1,13 +1,13 @@
-import { Component, For, onMount } from 'solid-js'
-import { UnsignedTx, WalletName, WalletType } from 'cosmes/wallet'
+import { Component, For, onMount } from "solid-js"
+import { UnsignedTx, WalletName, WalletType } from "cosmes/wallet"
 
-import { routes } from './routes'
-import { useRoutes } from '@solidjs/router'
+import { routes } from "./routes"
+import { useRoutes } from "@solidjs/router"
 
-import { MsgSend } from 'cosmes/client'
-import { getDenom } from './connect/utils'
-import Nav from './layout/nav'
-import { CONTROLLERS, TYPES, WALLETS } from './connect/constants'
+import { MsgSend } from "cosmes/client"
+import { getDenom } from "./connect/utils"
+import Nav from "./layout/nav"
+import { CONTROLLERS, TYPES, WALLETS } from "./connect/constants"
 import {
   chain,
   connect,
@@ -21,11 +21,11 @@ import {
   type,
   wallet,
   wallets
-} from './stores/createWalletStore'
+} from "./stores/createWalletStore"
 
 const SIGN_ARBITRARY_MSG =
-  'Hi from Coinhall! This is a test message just to prove that the wallet is working.'
-const TX_MEMO = 'signed via cosmes'
+  "Hi from Coinhall! This is a test message just to prove that the wallet is working."
+const TX_MEMO = "signed via cosmes"
 
 const App: Component = () => {
   //const location = useLocation()
@@ -36,7 +36,7 @@ const App: Component = () => {
       // Register to diconnect event
       controller.onDisconnect(wallets => {
         const chains = wallets.map(w => w.chainId)
-        console.log('Wallet disconnected', {
+        console.log("Wallet disconnected", {
           wallet: controller.id,
           chains
         })
@@ -49,7 +49,7 @@ const App: Component = () => {
       controller.onAccountChange(wallets => {
         // Reconnect the affected wallets
         const chains = wallets.map(w => w.chainId)
-        console.log('Wallet account changed', {
+        console.log("Wallet account changed", {
           wallet: controller.id,
           chains
         })
@@ -57,7 +57,7 @@ const App: Component = () => {
       })
 
       if (type() && wallet() && chain() && isConnected()) {
-        console.log('attempting to connect', type(), chain())
+        console.log("attempting to connect", type(), chain())
         void connect(type(), [chain()])
       }
     }
@@ -72,13 +72,13 @@ const App: Component = () => {
   async function signArbitrary() {
     const wallet = wallets[chain()]
     if (!wallet) {
-      alert('Wallet not connected yet')
+      alert("Wallet not connected yet")
       return
     }
     try {
       const res = await wallet.signArbitrary(SIGN_ARBITRARY_MSG)
       console.log(res)
-      alert('Sign success! Check console logs for details.')
+      alert("Sign success! Check console logs for details.")
     } catch (err) {
       console.error(err)
       alert((err as Error).message)
@@ -88,7 +88,7 @@ const App: Component = () => {
   async function broadcastTx() {
     const wallet = wallets[chain()]
     if (!wallet) {
-      alert('Wallet not connected yet')
+      alert("Wallet not connected yet")
       return
     }
     try {
@@ -100,7 +100,7 @@ const App: Component = () => {
             amount: [
               {
                 denom: getDenom(chain()),
-                amount: '1'
+                amount: "1"
               }
             ]
           })
@@ -109,16 +109,16 @@ const App: Component = () => {
       }
 
       const fee = await wallet.estimateFee(tx)
-      console.log('Tx fee:', fee)
+      console.log("Tx fee:", fee)
 
       const txHash = await wallet.broadcastTx(tx, fee)
-      console.log('Tx hash:', txHash)
+      console.log("Tx hash:", txHash)
 
       const { txResponse } = await wallet.pollTx(txHash)
-      console.log('Tx response:', txResponse)
+      console.log("Tx response:", txResponse)
 
       alert(
-        'Broadcast success!\n\nTx hash: ' + txHash + '\n\nCheck console logs for details.'
+        "Broadcast success!\n\nTx hash: " + txHash + "\n\nCheck console logs for details."
       )
     } catch (err) {
       console.error(err)
@@ -131,7 +131,7 @@ const App: Component = () => {
       <Nav />
 
       <main>
-        <span>Connected Wallet = {connectedWallet()?.address || '-none-'}</span>
+        <span>Connected Wallet = {connectedWallet()?.address || "-none-"}</span>
         <div class=" bg-gray-900 text-gray-100 flex flex-col items-center justify-center text-sm sm:text-base md:text-lg space-y-3 p-3">
           <div class="flex space-x-2">
             <select

@@ -1,8 +1,8 @@
-import { RouteDataFunc } from '@solidjs/router'
+import { RouteDataFunc } from "@solidjs/router"
 
 const AboutData: RouteDataFunc = () => {
   return {
-    name: 'about'
+    name: "about"
   }
 }
 

@@ -1,6 +1,6 @@
-import { Link } from '@solidjs/router'
-import { For, Show } from 'solid-js'
-import { CHAINS } from '../connect/constants'
+import { Link } from "@solidjs/router"
+import { For, Show } from "solid-js"
+import { CHAINS } from "../connect/constants"
 
 import {
   chain,
@@ -8,7 +8,7 @@ import {
   connectedWallet,
   setChain,
   type
-} from '../stores/createWalletStore'
+} from "../stores/createWalletStore"
 
 export default function Nav() {
   return (

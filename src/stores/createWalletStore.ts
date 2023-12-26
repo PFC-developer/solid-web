@@ -1,26 +1,26 @@
-import { WalletName } from 'cosmes/wallet'
-import { ConnectedWallet } from 'cosmes/wallet'
-import { createSignal } from 'solid-js'
-import { WalletType } from 'cosmes/wallet'
-import { createStoredSignal } from './storeSignal'
-import { createStore } from 'solid-js/store'
-import { getGasPrice, getRpc } from '../connect/utils'
-import { CONTROLLERS } from '../connect/constants'
+import { WalletName } from "cosmes/wallet"
+import { ConnectedWallet } from "cosmes/wallet"
+import { createSignal } from "solid-js"
+import { WalletType } from "cosmes/wallet"
+import { createStoredSignal } from "./storeSignal"
+import { createStore } from "solid-js/store"
+import { getGasPrice, getRpc } from "../connect/utils"
+import { CONTROLLERS } from "../connect/constants"
 
 export const [connectedWallet, setConnectedWallet] = createSignal<ConnectedWallet>()
 export const [isConnected, setIsConnected] = createStoredSignal<boolean>(
-  'wallet-connected',
+  "wallet-connected",
   false
 )
-export const [chain, setChain] = createStoredSignal<string>('chain-id', 'injective-1')
+export const [chain, setChain] = createStoredSignal<string>("chain-id", "injective-1")
 export const [type, setType] = createStoredSignal<WalletType>(
-  'wallet-type',
+  "wallet-type",
   WalletType.EXTENSION
 )
 export const [wallets, setWallets] = createStore<Record<string, ConnectedWallet>>({})
 
 export const [wallet, setWallet] = createStoredSignal<WalletName>(
-  'wallet-name',
+  "wallet-name",
   WalletName.KEPLR
 )
 

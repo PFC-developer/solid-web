@@ -1,5 +1,5 @@
-import { Suspense } from 'solid-js'
-import { useRouteData } from '@solidjs/router'
+import { Suspense } from "solid-js"
+import { useRouteData } from "@solidjs/router"
 
 export default function About() {
   const data = useRouteData()

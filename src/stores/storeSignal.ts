@@ -1,4 +1,4 @@
-import { createSignal, Signal } from 'solid-js'
+import { createSignal, Signal } from "solid-js"
 
 export function createStoredSignal<T>(
   key: string,
